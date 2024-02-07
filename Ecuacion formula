@@ -1,0 +1,36 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+void calcularRaices(float va, float vb, float vc);
+int main() {
+   float va, vb, vc;
+   cout << "Ingrese a: ";
+   cin >> va;
+   if (va == 0)
+       cout << "No tiene solución" << endl;
+   else {
+       cout << "Ingrese b: ";
+       cin >> vb;
+       cout << "Ingrese c: ";
+       cin >> vc;
+       calcularRaices(va,vb,vc);
+   }
+   return 0;
+}
+void calcularRaices(float va, float vb, float vc) {
+   float discriminante = vb * vb - 4 * va * vc;
+   if (discriminante > 0) {
+       float raiz1 = (-vb + sqrt(discriminante)) / (2 * va);
+       float raiz2 = (-vb - sqrt(discriminante)) / (2 * va);
+       cout << "Las raíces reales son: " << raiz1 << " y " << raiz2 << endl;
+   } else if (discriminante == 0) {
+       float raiz = -vb / (2 * va);
+       cout << "La única solución es: " << raiz << endl;
+   } else {
+       float parteReal = -vb / (2 * va);
+       float parteImaginaria = sqrt(-discriminante) / (2 * va);
+       cout << "Las soluciones son imaginarias:" << endl;
+       cout << "Solución 1: " << parteReal << " + " << parteImaginaria << "i" << endl;
+       cout << "Solución 2: " << parteReal << " - " << parteImaginaria << "i" << endl;
+    }
+}
