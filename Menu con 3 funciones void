@@ -1,0 +1,98 @@
+#include <iostream>
+using namespace std;
+
+void potencia(float n, float p,float&result);
+int factorial(int n);
+float serie(float n, float x);
+int main()
+{
+   int opcion,n;
+   float p,x,re;
+   do{
+       cout<<endl;
+       cout<<"-----Menú----"<<endl;
+   cout<<"1.- Potencia "<<endl;
+   cout<<"2.- Factorial "<<endl;
+   cout<<"3.- Serie "<<endl;
+   cout<<"0.- Salir"<<endl;
+   cout<<"Elija una opción: "<<endl;
+   cin>>opcion;
+     switch (opcion)
+   {
+       case 1:  cout<<"Ingresan el numero base del cual deseas saber su potencia: "<<endl;
+                cin>>s;
+                cout<<"Ingrese el exponente para la base: "<<s<<
+                cin>>p;
+                potencia(n,p,re);
+                cout<<"La potencia es  "<<p<<endl;
+                break;
+             
+       case 2: cout<<"Ingresa el valor del factorial"<<endl;
+                
+                cin>>n;
+                cout<<"EL factorial de"<<n<<"="<<factorial(n)<<endl;
+                break;
+             
+       case 3:  cout<<"Ingresa la variable x:"<<endl;
+                cin>>x;
+                cout<<"Ingresa la variable n: "<<endl;
+                cin>>n;
+                serie(n,x);
+             break;
+             
+       case 0: cout<<"Cerrando el programa...";
+             break;
+        default: cout<<"Opcion invalida, volver a ingresar"<<endl;
+            break;
+   }
+   }while(opcion!=0);
+   return 0;
+   }
+  
+   void potencia(float n, float p,float & re)
+{
+     r=1;
+    if(p<0)
+    {
+        for(int i=0;i<p;i++)
+        {
+            r=r*n;
+        }
+        r=1/r;
+        cout<<n<<" elevado a "<<p<<" es igual a: "<<r;
+    }
+    else if(p==0)
+    {
+        cout<<"1"<<endl;
+    }
+    else if(p>0)
+    {
+        for(int i=0;i<p;i++)
+        {
+            r=r*n;
+        }
+        cout<<n<<" elevado a "<<p<<" es igual a: "<<r;
+    }
+    return r;
+}
+int factorial(int n)
+{	
+    int fact=1;
+	for (int i=1;i<=n;i++)
+		fact= fact*i;
+	
+	return fact;
+}
+float serie(float n, float x)
+{
+    float suma=0;
+    for(int i=2;i<=n;i+2)
+    {
+        potencia(n,x
+        suma=suma+x;
+        x=potencia(x,i)/factorial(i);
+   }
+   suma=suma+3;
+   cout<<"El resultado de la serie es: "<<endl<<suma<<endl;
+   return suma;
+}
