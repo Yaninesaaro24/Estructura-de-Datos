@@ -1,0 +1,32 @@
+/******************************************************************************
+Fibonacci
+*******************************************************************************/
+#include <iostream>
+using namespace std;
+
+int fibonacci(int n);
+void imprimirFibonacci(int n, int i = 0);
+
+int main() {
+    int num;
+    cout << "Ingrese hasta que valor desea calcular la serie de Fibonacci: ";
+    cin >> num;
+    cout << "La serie de Fibonacci hasta " << num << " es: ";
+    imprimirFibonacci(num);
+    cout << endl;
+    return 0;
+}
+
+void imprimirFibonacci(int n, int i) {
+    if (i < n) {
+        cout << fibonacci(i) << " ";
+        imprimirFibonacci(n, i + 1);
+    }
+}
+
+int fibonacci(int n) {
+    if (n <= 1)
+        return n;
+    else
+        return fibonacci(n - 1) + fibonacci(n - 2);
+}
