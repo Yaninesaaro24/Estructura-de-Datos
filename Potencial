@@ -1,0 +1,26 @@
+/******************************************************************************
+ Autor:Yanine Saavedra 21-02-24
+*******************************************************************************/
+#include <iostream>
+using namespace std;
+
+float potencia(float base, float exponente);
+
+int main() {
+    float base, exponente;
+    cout << "Ingresa la base: " << endl;
+    cin >> base;
+    cout << "Ingresa el exponente: " << endl;
+    cin >> exponente;
+    cout << "El resultado de la potencia es: " << potencia(base, exponente) << endl;
+    return 0;
+}
+
+float potencia(float base, float exponente) {
+    float resultado = 1;
+    if (exponente == 0) {
+        return 1;
+    } else {
+        return base * potencia(base, exponente - 1);
+    }
+}
