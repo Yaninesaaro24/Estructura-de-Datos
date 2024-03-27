@@ -1,0 +1,14 @@
+def fibonacci_series(position):
+    series = []
+    for i in range(position):
+        if i <= 1:
+            series.append(i)
+        else:
+            series.append(series[-1] + series[-2])
+    return series
+
+print("Ingrese la posición en la secuencia de Fibonacci:")
+position = int(input())
+
+fib_series = fibonacci_series(position)
+print("La serie de Fibonacci hasta la posición", position, "es:", fib_series)
