@@ -1,0 +1,62 @@
+#include <iostream>
+#include "math.h"
+using namespace std;
+float calcularSolucionUnica(float coeficiente_a, float coeficiente_b, float constante_c, float determinante);
+void calcularSolucionDoble(float coeficiente_a, float coeficiente_b, float constante_c, float determinante);
+void calcularSolucionCompleja(float coeficiente_a, float coeficiente_b, float constante_c, float determinante);
+int main()
+{
+    float coeficiente_a, coeficiente_b, constante_c, determinante;
+    do { 
+        cout << "Ingrese el coeficiente cuadrático: ";
+        cin >> coeficiente_a;
+    } while (coeficiente_a == 0);
+    
+    cout << "Ingrese el coeficiente lineal: ";
+    cin >> coeficiente_b;
+    
+    cout << "Ingrese el término independiente: ";
+    cin >> constante_c;
+    
+    determinante = (pow(coeficiente_b, 2) - 4 * coeficiente_a * constante_c);
+    
+    if (determinante < 0)
+    {
+        calcularSolucionCompleja(coeficiente_a, coeficiente_b, constante_c, determinante);
+    }
+    else if (determinante == 0)
+    {
+        cout << "La solución única es " << calcularSolucionUnica(coeficiente_a, coeficiente_b, constante_c, determinante);
+    }
+    else if (determinante > 0)
+    {
+        calcularSolucionDoble(coeficiente_a, coeficiente_b, constante_c, determinante);
+    }
+    return 0;
+}
+
+float calcularSolucionUnica(float coeficiente_a, float coeficiente_b, float constante_c, float determinante)
+{
+    float raiz = sqrt(determinante);
+    float resultado = (-coeficiente_b + raiz) / (2 * coeficiente_a);
+    return resultado;
+}
+
+void calcularSolucionDoble(float coeficiente_a, float coeficiente_b, float constante_c, float determinante)
+{
+    float resultado1, resultado2, raiz;
+    raiz = sqrt(determinante);
+    resultado1 = (-coeficiente_b + raiz) / (2 * coeficiente_a);
+    resultado2 = (-coeficiente_b - raiz) / (2 * coeficiente_a);
+    
+    cout << "El primer resultado es " << resultado1;
+    cout << "El segundo resultado es " << resultado2;
+}
+
+void calcularSolucionCompleja(float coeficiente_a, float coeficiente_b, float constante_c, float determinante)
+{
+    float resultado1, resultado2, raiz;
+    raiz = sqrt(-determinante);
+    cout << "El primer resultado es " << -coeficiente_b << "+" << raiz << "i/" << 2 * coeficiente_a;
+    cout << "El segundo resultado es " << -coeficiente_b << "-" << raiz << "i/" << 2 * coeficiente_a;
+}
