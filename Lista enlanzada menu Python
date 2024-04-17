@@ -1,0 +1,171 @@
+//Yanine Saavedra 
+//Sebastian Cruz 
+class Nodo:
+    def __init__(self, dato):
+        self.dato = dato
+        self.siguiente = None
+
+class ListaEnlazada:
+    def __init__(self):
+        self.cabeza = None
+
+    def insertar_al_principio(self, dato):
+        nuevo_nodo = Nodo(dato)
+        nuevo_nodo.siguiente = self.cabeza
+        self.cabeza = nuevo_nodo
+
+    def insertar_al_final(self, dato):
+        nuevo_nodo = Nodo(dato)
+        if not self.cabeza:
+            self.cabeza = nuevo_nodo
+            return
+        temp = self.cabeza
+        while temp.siguiente:
+            temp = temp.siguiente
+        temp.siguiente = nuevo_nodo
+
+    def insertar_en_medio(self, dato, posicion):
+        if posicion == 0:
+            self.insertar_al_principio(dato)
+            return
+        nuevo_nodo = Nodo(dato)
+        temp = self.cabeza
+        for _ in range(posicion - 1):
+            if temp is None:
+                raise IndexError("Posición fuera de rango")
+            temp = temp.siguiente
+        nuevo_nodo.siguiente = temp.siguiente
+        temp.siguiente = nuevo_nodo
+
+    def retirar_al_principio(self):
+        if not self.cabeza:
+            raise Exception("La lista está vacía")
+        dato_retirado = self.cabeza.dato
+        self.cabeza = self.cabeza.siguiente
+        return dato_retirado
+
+    def retirar_del_final(self):
+        if not self.cabeza:
+            raise Exception("La lista está vacía")
+        if not self.cabeza.siguiente:
+            dato_retirado = self.cabeza.dato
+            self.cabeza = None
+            return dato_retirado
+        temp = self.cabeza
+        while temp.siguiente.siguiente:
+            temp = temp.siguiente
+        dato_retirado = temp.siguiente.dato
+        temp.siguiente = None
+        return dato_retirado
+
+    def retirar_del_medio(self, posicion):
+        if not self.cabeza:
+            raise Exception("La lista está vacía")
+        if posicion == 0:
+            return self.retirar_al_principio()
+        temp = self.cabeza
+        for _ in range(posicion - 1):
+            if temp is None or temp.siguiente is None:
+                raise IndexError("Posición fuera de rango")
+            temp = temp.siguiente
+        dato_retirado = temp.siguiente.dato
+        temp.siguiente = temp.siguiente.siguiente
+        return dato_retirado
+
+    def obtener_primer_elemento(self):
+        if not self.cabeza:
+            raise Exception("La lista está vacía")
+        return self.cabeza.dato
+
+    def obtener_ultimo_elemento(self):
+        if not self.cabeza:
+            raise Exception("La lista está vacía")
+        temp = self.cabeza
+        while temp.siguiente:
+            temp = temp.siguiente
+        return temp.dato
+
+    def esta_vacia(self):
+        return self.cabeza is None
+
+    def __str__(self):
+        temp = self.cabeza
+        lista_str = ""
+        while temp:
+            lista_str += str(temp.dato) + " -> "
+            temp = temp.siguiente
+        lista_str += "None"
+        return lista_str
+def mostrar_menu():
+    print("\nMenú de opciones:")
+    print("1. Insertar elemento al principio")
+    print("2. Insertar elemento al final")
+    print("3. Insertar elemento en medio")
+    print("4. Retirar elemento al principio")
+    print("5. Retirar elemento al final")
+    print("6. Retirar elemento en medio")
+    print("7. Imprimir primer elemento")
+    print("8. Imprimir último elemento")
+    print("9. Mostrar lista actual")
+    print("10. Verificar si la lista está vacía")
+    print("11. Salir")
+
+# Ejemplo de uso
+lista = ListaEnlazada()
+
+while True:
+    mostrar_menu()
+    opcion = input("Seleccione una opción: ")
+
+    if opcion == "1":
+        dato = input("Ingrese el dato a insertar al principio: ")
+        lista.insertar_al_principio(dato)
+    elif opcion == "2":
+        dato = input("Ingrese el dato a insertar al final: ")
+        lista.insertar_al_final(dato)
+    elif opcion == "3":
+        dato = input("Ingrese el dato a insertar: ")
+        posicion = int(input("Ingrese la posición donde desea insertar: "))
+        lista.insertar_en_medio(dato, posicion)
+    elif opcion == "4":
+        try:
+            dato_retirado = lista.retirar_al_principio()
+            print("Se retiró el elemento:", dato_retirado)
+        except Exception as e:
+            print(e)
+    elif opcion == "5":
+        try:
+            dato_retirado = lista.retirar_del_final()
+            print("Se retiró el elemento:", dato_retirado)
+        except Exception as e:
+            print(e)
+    elif opcion == "6":
+        try:
+            posicion = int(input("Ingrese la posición del elemento a retirar: "))
+            dato_retirado = lista.retirar_del_medio(posicion)
+            print("Se retiró el elemento:", dato_retirado)
+        except Exception as e:
+            print(e)
+    elif opcion == "7":
+        try:
+            print("Primer elemento:", lista.obtener_primer_elemento())
+        except Exception as e:
+            print(e)
+    elif opcion == "8":
+        try:
+            print("Último elemento:", lista.obtener_ultimo_elemento())
+        except Exception as e:
+            print(e)
+    elif opcion == "9":
+        print("Lista actual:", lista)
+    elif opcion == "10":
+        if lista.esta_vacia():
+            print("La lista está vacía.")
+        else:
+            print("La lista no está vacía.")
+    elif opcion == "11":
+        print("Saliendo del programa...")
+        break
+    else:
+        print("Opción no válida. Por favor, seleccione una opción válida del menú.")
+
